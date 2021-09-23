@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "100713898444",
+    "project_id": "docshare-3f010",
+    "storage_bucket": "docshare-3f010.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:100713898444:android:7b8579123a11d0296efd69",
+        "android_client_info": {
+          "package_name": "com.example.docshare"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "100713898444-73hfiraen8nior91mstbat8hmp0lh6a6.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDPycp02U7FwVemMzlRUs6bcTEjkM-IDSI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "100713898444-73hfiraen8nior91mstbat8hmp0lh6a6.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
