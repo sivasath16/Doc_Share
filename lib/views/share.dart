@@ -77,7 +77,7 @@ class _ShareState extends State<Share> {
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
-        centerTitle: true,
+        //centerTitle: true,
         leading: IconButton(
           icon: Icon(Icons.home_filled,color: Colors.black,),
           onPressed: (){
@@ -85,21 +85,26 @@ class _ShareState extends State<Share> {
           },
         ),
         backgroundColor: Colors.white,
-        title: Text(
-          'DOC SHARE',style: (TextStyle(
-          fontWeight: FontWeight.bold,
-          color: Colors.black,
-          fontFamily: 'Oleo',
-          fontSize: 25,
-          shadows: [
-            Shadow(
-              blurRadius: 10.0,
-              color: Colors.grey,
-              offset: Offset(0.0, 3.0),
-            ),
-          ],
-        )),
-        ),
+        title: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children:[
+              Image.asset('assets/logo.png',width: 50,),
+              Text(
+                'DOC SHARE',style: (TextStyle(
+                fontWeight: FontWeight.bold,
+                color: Colors.black,
+                fontFamily: 'Oleo',
+                fontSize: 25,
+                shadows: [
+                  Shadow(
+                    blurRadius: 10.0,
+                    color: Colors.grey,
+                    offset: Offset(0.0, 3.0),
+                  ),
+                ],
+              )),
+              ),
+            ]),
       ),
       body: Container(
         decoration: BoxDecoration(
@@ -118,7 +123,7 @@ class _ShareState extends State<Share> {
             children: [
               Container(
                 margin: EdgeInsets.only(left: 0,top: 70),
-                height: 120,
+                height: 100,
                 width: 320,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(10),
@@ -142,7 +147,7 @@ class _ShareState extends State<Share> {
                 ]),
               ),
               Container(
-                margin: EdgeInsets.only(top: 200),
+                margin: EdgeInsets.only(top: 20),
                 height: 50,
                 width: 200,
                 decoration: BoxDecoration(
@@ -171,7 +176,7 @@ class _ShareState extends State<Share> {
                 ),
               ),
               Container(
-                margin: EdgeInsets.only(top: 70),
+                margin: EdgeInsets.only(top: 40),
                 height: 50,
                 width: 200,
                 decoration: BoxDecoration(

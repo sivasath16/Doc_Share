@@ -29,7 +29,7 @@ class _ReceiveState extends State<Receive> {
         buttons: [
           DialogButton(
               child: Text('Okay',style: TextStyle(fontSize: 20),),
-              onPressed: (){Navigator.push(context, MaterialPageRoute(builder: (context) => HomePage(),));
+              onPressed: (){
               },
               gradient: LinearGradient(colors: [
                 Color.fromRGBO(116, 116, 191, 1.0),
@@ -61,7 +61,7 @@ class _ReceiveState extends State<Receive> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        centerTitle: true,
+        //centerTitle: true,
         leading: IconButton(
           icon: Icon(Icons.home_filled,color: Colors.black,),
           onPressed: (){
@@ -69,21 +69,26 @@ class _ReceiveState extends State<Receive> {
           },
         ),
         backgroundColor: Colors.white,
-        title: Text(
-          'DOC SHARE',style: (TextStyle(
-          fontWeight: FontWeight.bold,
-          color: Colors.black,
-          fontFamily: 'Oleo',
-          fontSize: 25,
-          shadows: [
-            Shadow(
-              blurRadius: 10.0,
-              color: Colors.grey,
-              offset: Offset(0.0, 3.0),
-            ),
-          ],
-        )),
-        ),
+        title: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children:[
+              Image.asset('assets/logo.png',width: 50,),
+              Text(
+                'DOC SHARE',style: (TextStyle(
+                fontWeight: FontWeight.bold,
+                color: Colors.black,
+                fontFamily: 'Oleo',
+                fontSize: 25,
+                shadows: [
+                  Shadow(
+                    blurRadius: 10.0,
+                    color: Colors.grey,
+                    offset: Offset(0.0, 3.0),
+                  ),
+                ],
+              )),
+              ),
+            ]),
       ),
       body: Container(
         decoration: BoxDecoration(
@@ -127,7 +132,7 @@ class _ReceiveState extends State<Receive> {
                   ),
 
                   Container(
-                    margin: EdgeInsets.only(top: MediaQuery.of(context).size.height-550),
+                    margin: EdgeInsets.only(top: MediaQuery.of(context).size.height-650),
                     height: 50,
                     width: 200,
                     decoration: BoxDecoration(

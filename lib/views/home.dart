@@ -12,24 +12,26 @@ class HomePage extends StatelessWidget {
       appBar: AppBar(
         elevation: 0,
         backgroundColor: Colors.white,
-        title: Center(
-          child: Text(
-            'DOC SHARE',style: (TextStyle(
-            fontWeight: FontWeight.bold,
-            color: Colors.black,
-            fontFamily: 'Oleo',
-            fontSize: 25,
-            shadows: [
-              Shadow(
-                blurRadius: 10.0,
-                color: Colors.grey,
-                offset: Offset(0.0, 3.0),
-              ),
-            ],
-          )),
-          ),
-
-        ),
+        title: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children:[
+            Image.asset('assets/logo.png',width: 50,),
+            Text(
+              'DOC SHARE',style: (TextStyle(
+              fontWeight: FontWeight.bold,
+              color: Colors.black,
+              fontFamily: 'Oleo',
+              fontSize: 25,
+              shadows: [
+                Shadow(
+                  blurRadius: 10.0,
+                  color: Colors.grey,
+                  offset: Offset(0.0, 3.0),
+                ),
+              ],
+            )),
+            ),
+        ]),
       ),
       body: Container(
         decoration: BoxDecoration(
