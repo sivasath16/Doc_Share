@@ -1,11 +1,12 @@
-
-import 'dart:io';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:docshare/views/home.dart';
+import 'package:ext_storage/ext_storage.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_downloader/flutter_downloader.dart';
+import 'package:path_provider/path_provider.dart';
+import 'package:permission_handler/permission_handler.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 
 class Receive extends StatefulWidget {
@@ -146,13 +147,28 @@ class _ReceiveState extends State<Receive> {
                         ]
                     ),
                     child: MaterialButton(
-                      onPressed: (){
+                      onPressed: ()async{
                         isavailable(password.text);
                         if(form.currentState!.validate() && isav){
                           alert();
                           print(details?['download Url']);
                         }
-                        //downloadFile(details?['download Url'], details?['filename'], dir);
+                        final status  = await Permission.storage.request();
+
+                        if(status.isGranted){
+
+                          final externalDir = await getExternalStorageDirectory();
+
+                          final id = await FlutterDownloader.enqueue(
+                              url: "",
+                              savedDir: externalDir!.path,
+                            fileName: "download",
+                            showNotification: true,
+                            openFileFromNotification: true,
+                          );
+                        }else{
+                          print("permission Denied");
+                        }
 
                       },
                       child: Padding(
@@ -175,3 +191,5 @@ class _ReceiveState extends State<Receive> {
     );
   }
 }
+
+
