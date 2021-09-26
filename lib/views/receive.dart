@@ -1,8 +1,12 @@
+import 'dart:io';
+
+import 'package:android_path_provider/android_path_provider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:docshare/views/home.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_downloader/flutter_downloader.dart';
 import 'package:image_downloader/image_downloader.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:permission_handler/permission_handler.dart';
@@ -148,12 +152,24 @@ class _ReceiveState extends State<Receive> {
                               final status = await Permission.storage.request();
 
                               if (status.isGranted) {
-                                ImageDownloader.downloadImage(
-                                  details!["download Url"],
-                                  destination:
-                                      AndroidDestinationType.directoryDownloads
-                                        ..subDirectory(details!["filename"]),
-                                );
+                                // FlutterDownloader.enqueue(url: url, savedDir: savedDir)
+                                _findLocalPath().then((path) {
+                                  FlutterDownloader.enqueue(
+                                    url: details!["download Url"],
+                                    savedDir: path!,
+                                    showNotification:
+                                        true, // show download progress in status bar (for Android)
+                                    openFileFromNotification:
+                                        true, // click on notification to open downloaded file (for Android)
+                                  );
+                                });
+
+                                // ImageDownloader.downloadImage(
+                                //   details!["download Url"],
+                                //   destination:
+                                //       AndroidDestinationType.directoryDownloads
+                                //         ..subDirectory(details!["filename"]),
+                                // );
                                 alert();
                               } else {
                                 print("permission Denied");
@@ -185,5 +201,21 @@ class _ReceiveState extends State<Receive> {
         ),
       ),
     );
+  }
+
+  Future<String?> _findLocalPath() async {
+    var externalStorageDirPath;
+    if (Platform.isAndroid) {
+      try {
+        externalStorageDirPath = await AndroidPathProvider.downloadsPath;
+      } catch (e) {
+        final directory = await getExternalStorageDirectory();
+        externalStorageDirPath = directory?.path;
+      }
+    } else if (Platform.isIOS) {
+      externalStorageDirPath =
+          (await getApplicationDocumentsDirectory()).absolute.path;
+    }
+    return externalStorageDirPath;
   }
 }
