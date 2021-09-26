@@ -1,4 +1,6 @@
 import 'dart:io';
+import 'dart:isolate';
+import 'dart:ui';
 
 import 'package:android_path_provider/android_path_provider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -43,6 +45,35 @@ class _ReceiveState extends State<Receive> {
               ]))
         ]).show();
   }
+
+  ReceivePort _port = ReceivePort();
+
+  @override
+  void initState() {
+    super.initState();
+
+    IsolateNameServer.registerPortWithName(_port.sendPort, 'downloader_send_port');
+    _port.listen((dynamic data) {
+      String id = data[0];
+      DownloadTaskStatus status = data[1];
+      int progress = data[2];
+      setState((){ });
+    });
+
+    FlutterDownloader.registerCallback(downloadCallback);
+  }
+
+  @override
+  void dispose() {
+    IsolateNameServer.removePortNameMapping('downloader_send_port');
+    super.dispose();
+  }
+
+  static void downloadCallback(String id, DownloadTaskStatus status, int progress) {
+    final SendPort send = IsolateNameServer.lookupPortByName('downloader_send_port')!;
+    send.send([id, status, progress]);
+  }
+
 
   Map<String, dynamic>? details;
   Future<QuerySnapshot<Map<String, dynamic>?>> isavailable(String key) async {
