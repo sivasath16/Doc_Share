@@ -35,9 +35,10 @@ dependencies:
   cloud_firestore: ^2.5.2
   firebase_storage: ^10.0.3
   firebase_analytics: ^5.0.6
-  flutter_downloader: ^1.5.2
+  flutter_downloader: ^1.7.0
   permission_handler: ^8.1.6
-  ext_storage: ^1.0.3
+  android_path_provider: ^0.2.1
+  image_downloader: ^0.30.0
   path_provider: ^2.0.4
 
 dev_dependencies:
